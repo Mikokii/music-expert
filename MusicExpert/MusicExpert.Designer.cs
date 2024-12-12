@@ -34,15 +34,16 @@
             this.rB2 = new System.Windows.Forms.RadioButton();
             this.rB3 = new System.Windows.Forms.RadioButton();
             this.rB4 = new System.Windows.Forms.RadioButton();
+            this.rB5 = new System.Windows.Forms.RadioButton();
             this.SuspendLayout();
             // 
             // next
             // 
             this.next.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.next.Location = new System.Drawing.Point(0, 253);
+            this.next.Location = new System.Drawing.Point(0, 273);
             this.next.Margin = new System.Windows.Forms.Padding(4);
             this.next.Name = "next";
-            this.next.Size = new System.Drawing.Size(624, 28);
+            this.next.Size = new System.Drawing.Size(684, 28);
             this.next.TabIndex = 0;
             this.next.Text = "Next >";
             this.next.UseVisualStyleBackColor = true;
@@ -106,11 +107,24 @@
             this.rB4.Text = "radioButton4";
             this.rB4.UseVisualStyleBackColor = true;
             // 
+            // rB5
+            // 
+            this.rB5.AutoSize = true;
+            this.rB5.Location = new System.Drawing.Point(20, 225);
+            this.rB5.Margin = new System.Windows.Forms.Padding(4);
+            this.rB5.Name = "rB5";
+            this.rB5.Size = new System.Drawing.Size(107, 21);
+            this.rB5.TabIndex = 6;
+            this.rB5.TabStop = true;
+            this.rB5.Text = "radioButton5";
+            this.rB5.UseVisualStyleBackColor = true;
+            // 
             // MusicExpert
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(624, 281);
+            this.ClientSize = new System.Drawing.Size(684, 301);
+            this.Controls.Add(this.rB5);
             this.Controls.Add(this.rB4);
             this.Controls.Add(this.rB3);
             this.Controls.Add(this.rB2);
@@ -134,6 +148,7 @@
         private System.Windows.Forms.RadioButton rB2;
         private System.Windows.Forms.RadioButton rB3;
         private System.Windows.Forms.RadioButton rB4;
+        private System.Windows.Forms.RadioButton rB5;
     }
 }
 

@@ -1,9 +1,11 @@
 ﻿using System;
+using System.CodeDom;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Drawing.Text;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -16,14 +18,16 @@ namespace MusicExpert
     public partial class MusicExpert : Form
     {
         private CLIPSNET.Environment clips = new CLIPSNET.Environment();
-        private List<string> messagesList = new List<string>();
-        private string currentSong;
-        private FactAddressValue currentState;
+        private enum CurrentState { PROCESS, LEAF};
+        private CurrentState currentState;
+        private String currentInfoId;
+        private List<string> currentMessagesId = new List<string>();
         public MusicExpert()
         {
             InitializeComponent();
             clips.LoadFromResource("MusicExpert","MusicExpert.facts.clp");
             clips.LoadFromResource("MusicExpert", "MusicExpert.rules.clp");
+            clips.LoadFromResource("MusicExpert", "MusicExpert.id_to_text.clp");
         }
 
         protected override void OnLoad(EventArgs e)
@@ -32,7 +36,7 @@ namespace MusicExpert
         }
         private void next_Click(object sender, EventArgs e)
         {
-            if (currentState["name"].ToString() == "\"LEAF\"")
+            if (currentState == CurrentState.LEAF)
             {
                 Setup();
                 return;
@@ -41,18 +45,26 @@ namespace MusicExpert
             RadioButton checked_rbutton = GetCheckedChoiceButton();
             if (checked_rbutton != null)
             {
-                clips.AssertString($"(user-response {checked_rbutton.Text})");
+                clips.AssertString("(process)");
+                String evalStr = "(find-fact ((?f state)) TRUE)";
+                FactAddressValue fv = (FactAddressValue)((MultifieldValue)clips.Eval(evalStr))[0];
+
+                int index = FindIndex(checked_rbutton);
+                clips.AssertString($"({fv["asked"].ToString()} {currentMessagesId[index]})");
                 clips.Run();
                 FetchAndDisplayMessages();
             }
             UncheckButtons();
+        }
 
-
-            currentState = clips.FindFact("current-state");
-            if (currentState["name"].ToString() == "\"LEAF\"")
-            {
-                next.Text = "Restart";    
-            }
+        private int FindIndex(RadioButton checked_rbutton)
+        {
+            if (checked_rbutton == rB1) return 0;
+            else if (checked_rbutton == rB2) return 1;
+            else if (checked_rbutton == rB3) return 2;
+            else if (checked_rbutton == rB4) return 3;
+            else if (checked_rbutton == rB5) return 4;
+            return -1;
         }
 
         private void Setup()
@@ -60,14 +72,12 @@ namespace MusicExpert
             clips.Reset();
             clips.Run();
             FetchAndDisplayMessages();
-            currentState = clips.FindFact("current-state");
-            next.Text = "Next ->";
         }
 
         private RadioButton GetCheckedChoiceButton()
         {
             // Create a list of radio buttons
-            List<RadioButton> radioButtons = new List<RadioButton> { rB1, rB2, rB3, rB4 };
+            List<RadioButton> radioButtons = new List<RadioButton> { rB1, rB2, rB3, rB4, rB5 };
 
             // Iterate through the list of radio buttons
             foreach (var radioButton in radioButtons)
@@ -82,7 +92,7 @@ namespace MusicExpert
         private void UncheckButtons()
         {
             // Create a list of radio buttons
-            List<RadioButton> radioButtons = new List<RadioButton> { rB1, rB2, rB3, rB4 };
+            List<RadioButton> radioButtons = new List<RadioButton> { rB1, rB2, rB3, rB4, rB5 };
 
             // Iterate through the list of radio buttons
             foreach (var radioButton in radioButtons)
@@ -94,74 +104,62 @@ namespace MusicExpert
 
         private void FetchAndDisplayMessages()
         {
-            messagesList.Clear();
-            currentSong = null;
+            currentMessagesId.Clear();
+            String evalStr = "(find-fact ((?f state)) TRUE)";
+            FactAddressValue fv = (FactAddressValue)((MultifieldValue)clips.Eval(evalStr))[0];
 
-            List<FactAddressValue> messages = clips.FindAllFacts("display-message");
+            /*========================================*/
+            /* Determine the Next/Prev button states. */
+            /*========================================*/
 
-            foreach (FactAddressValue message in messages)
+            if (fv["is-leaf"].ToString().Equals("Yes"))
             {
-                string text = message["text"].ToString();
-                messagesList.Add(text); // Add the message to the list
-                clips.Eval($"(retract {message.FactIndex})");
-            }
-
-            FactAddressValue currentSongFact = clips.FindFact("current-song");
-            if (currentSongFact != null)
-            {
-                currentSong = currentSongFact["name"].ToString(); // Get the song name
-            }
-
-            ChangeMessages();
-        }
-
-        private void ChangeMessages()
-        {
-            if (!string.IsNullOrEmpty(currentSong))
-            {
-                Info.Text = currentSong;
-            }
-
-            // Only show the radio buttons that have corresponding messages
-            if (messagesList.Count > 0 && !string.IsNullOrEmpty(messagesList[0]) && messagesList[0].Length > 2)
-            {
-                rB1.Visible = true;
-                rB1.Text = messagesList[0];
+                currentState = CurrentState.LEAF;
+                next.Text = "Restart";
             }
             else
             {
-                rB1.Visible = false;
+                currentState = CurrentState.PROCESS;
+                next.Text = "Next ->";
+
             }
 
-            if (messagesList.Count > 1 && !string.IsNullOrEmpty(messagesList[1]) && messagesList[1].Length > 2)
+            /*=====================*/
+            /* Set up the choices. */
+            /*=====================*/
+
+            MultifieldValue damf = (MultifieldValue)fv["answers"];
+            List<RadioButton> radioButtons = new List<RadioButton> { rB1, rB2, rB3, rB4, rB5 };
+            
+            foreach (var radioButton in radioButtons)
             {
-                rB2.Visible = true;
-                rB2.Text = messagesList[1];
-            }
-            else
-            {
-                rB2.Visible = false;
+                radioButton.Visible = false;
             }
 
-            if (messagesList.Count > 2 && !string.IsNullOrEmpty(messagesList[2]) && messagesList[2].Length > 2)
+            for (int i = 0; i < damf.Count; i++)
             {
-                rB3.Visible = true;
-                rB3.Text = messagesList[2];
-            }
-            else
-            {
-                rB3.Visible = false;
+                LexemeValue da = (LexemeValue)damf[i];
+
+                RadioButton rButton = radioButtons[i];
+
+                String id = da.Value;
+                currentMessagesId.Add(id);
+                string messageQuery = $"(find-fact ((?f text-to-id)) (eq ?f:id {id}))";
+                string message = ((FactAddressValue)((MultifieldValue)clips.Eval(messageQuery))[0])["text"].ToString(); ;
+                rButton.Text = message;
+                rButton.Visible = true;
             }
 
-            if (messagesList.Count > 3 && !string.IsNullOrEmpty(messagesList[3]) && messagesList[3].Length > 2)
-            {
-                rB4.Visible = true;
-                rB4.Text = messagesList[3];
-            }
-            else
-            {
-                rB4.Visible = false;
-            }
+            /*====================================*/
+            /* Set the label to the display text. */
+            /*====================================*/
+
+            String textId = (((SymbolValue)fv["content"]).Value).ToString();
+            currentInfoId = textId;
+            String textQuery = $"(find-fact ((?f text-to-id)) (eq ?f:id {textId}))";
+            String text = ((FactAddressValue)((MultifieldValue)clips.Eval(textQuery))[0])["text"].ToString();
+
+            Info.Text = text;
         }
     }
 }
