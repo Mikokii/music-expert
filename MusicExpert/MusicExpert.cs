@@ -50,7 +50,7 @@ namespace MusicExpert
                 FactAddressValue fv = (FactAddressValue)((MultifieldValue)clips.Eval(evalStr))[0];
 
                 int index = FindIndex(checked_rbutton);
-                clips.AssertString($"({fv["asked"].ToString()} {currentMessagesId[index]})");
+                clips.AssertString($"(answer {fv["asked"].ToString()} {currentMessagesId[index]})");
                 clips.Run();
                 FetchAndDisplayMessages();
             }

@@ -11,9 +11,10 @@
 (defrule qustion-OKComputer
 ?id1 <- (process)
 ?id2 <- (state)
-(askedGenre answerRock)
+(answer askedGenre answerRock)
 =>
 (retract ?id1 ?id2)
+(assert (clean-up))
 (assert (state
 (content songOKComputer)
 (asked askedOKComputer)
@@ -23,9 +24,10 @@
 (defrule qustion-KidA
 ?id1 <- (process)
 ?id2 <- (state)
-(askedOKComputer answerCoolRock)
+(answer askedOKComputer answerCoolRock)
 =>
 (retract ?id1 ?id2)
+(assert (clean-up))
 (assert (state
 (content songKidA)
 (asked askedKidA)
@@ -35,9 +37,10 @@
 (defrule qustion-SilentShout
 ?id1 <- (process)
 ?id2 <- (state)
-(askedKidA answerWeirdGood)
+(answer askedKidA answerWeirdGood)
 =>
 (retract ?id1 ?id2)
+(assert (clean-up))
 (assert (state
 (content songSilentShout)
 (asked askedSilentShout)
@@ -47,9 +50,10 @@
 (defrule qustion-Psychic
 ?id1 <- (process)
 ?id2 <- (state)
-(or (askedKidA answerCoolGuitars) (askedSilentShout answerTooWeird))
+(or (answer askedKidA answerCoolGuitars) (answer askedSilentShout answerTooWeird))
 =>
 (retract ?id1 ?id2)
+(assert (clean-up))
 (assert (state
 (content songPsychic)
 (asked askedPsychic)
@@ -59,9 +63,10 @@
 (defrule qustion-SpaceIsOnlyNoise
 ?id1 <- (process)
 ?id2 <- (state)
-(askedPsychic answerMoreTheSame)
+(answer askedPsychic answerMoreTheSame)
 =>
 (retract ?id1 ?id2)
+(assert (clean-up))
 (assert (state
 (content songSpaceIsOnlyNoise)
 (asked askedSpaceIsOnlyNoise)
@@ -71,9 +76,10 @@
 (defrule qustion-LiftYourSkinnyFistsLikeAntennasToHeaven
 ?id1 <- (process)
 ?id2 <- (state)
-(askedKidA answerTooElectronic)
+(answer askedKidA answerTooElectronic)
 =>
 (retract ?id1 ?id2)
+(assert (clean-up))
 (assert (state
 (content songLiftYourSkinnyFistsLikeAntennasToHeaven)
 (asked askedLiftYourSkinnyFistsLikeAntennasToHeaven)
@@ -83,9 +89,10 @@
 (defrule qustion-TarotSport
 ?id1 <- (process)
 ?id2 <- (state)
-(askedLiftYourSkinnyFistsLikeAntennasToHeaven answerLoveBuildups)
+(answer askedLiftYourSkinnyFistsLikeAntennasToHeaven answerLoveBuildups)
 =>
 (retract ?id1 ?id2)
+(assert (clean-up))
 (assert (state
 (content songTarotSport)
 (asked askedTarotSport)
@@ -95,9 +102,10 @@
 (defrule qustion-Neu
 ?id1 <- (process)
 ?id2 <- (state)
-(askedLiftYourSkinnyFistsLikeAntennasToHeaven answerMoreMinimal)
+(answer askedLiftYourSkinnyFistsLikeAntennasToHeaven answerMoreMinimal)
 =>
 (retract ?id1 ?id2)
+(assert (clean-up))
 (assert (state
 (content songNeu)
 (asked askedNeu)
@@ -107,9 +115,10 @@
 (defrule qustion-ProgramMusic
 ?id1 <- (process)
 ?id2 <- (state)
-(askedLiftYourSkinnyFistsLikeAntennasToHeaven answerPostRock)
+(answer askedLiftYourSkinnyFistsLikeAntennasToHeaven answerPostRock)
 =>
 (retract ?id1 ?id2)
+(assert (clean-up))
 (assert (state
 (content songProgramMusic)
 (asked askedProgramMusic)
@@ -119,9 +128,10 @@
 (defrule qustion-e2-e4
 ?id1 <- (process)
 ?id2 <- (state)
-(askedNeu answerMoreElectronic)
+(answer askedNeu answerMoreElectronic)
 =>
 (retract ?id1 ?id2)
+(assert (clean-up))
 (assert (state
 (content songe2-e4)
 (asked askede2-e4)
@@ -131,9 +141,10 @@
 (defrule qustion-Phaedra
 ?id1 <- (process)
 ?id2 <- (state)
-(or (askedProgramMusic answerMoreAmbientParts) (askedTarotSport answerMoreQuieter) (askede2-e4 answerFullyElectronic))
+(or (answer askedProgramMusic answerMoreAmbientParts) (answer askedTarotSport answerMoreQuieter) (answer askede2-e4 answerFullyElectronic))
 =>
 (retract ?id1 ?id2)
+(assert (clean-up))
 (assert (state
 (content songPhaedra)
 (asked askedPhaedra)
@@ -143,9 +154,10 @@
 (defrule qustion-Plantasia
 ?id1 <- (process)
 ?id2 <- (state)
-(askedPhaedra answerSynthsShorterHappy)
+(answer askedPhaedra answerSynthsShorterHappy)
 =>
 (retract ?id1 ?id2)
+(assert (clean-up))
 (assert (state
 (content songPlantasia)
 (asked askedPlantasia)
@@ -156,9 +168,10 @@
 (defrule qustion-808s
 ?id1 <- (process)
 ?id2 <- (state)
-(askedGenre answerRap)
+(answer askedGenre answerRap)
 =>
 (retract ?id1 ?id2)
+(assert (clean-up))
 (assert (state
 (content song808s)
 (asked asked808s)
@@ -168,9 +181,10 @@
 (defrule qustion-FeedTheAnimals
 ?id1 <- (process)
 ?id2 <- (state)
-(asked808s answerRealRap)
+(answer asked808s answerRealRap)
 =>
 (retract ?id1 ?id2)
+(assert (clean-up))
 (assert (state
 (content songFeedTheAnimals)
 (asked askedFeedTheAnimals)
@@ -180,9 +194,10 @@
 (defrule qustion-SinceILeftYou
 ?id1 <- (process)
 ?id2 <- (state)
-(askedFeedTheAnimals answerCoolSampling)
+(answer askedFeedTheAnimals answerCoolSampling)
 =>
 (retract ?id1 ?id2)
+(assert (clean-up))
 (assert (state
 (content songSinceILeftYou)
 (asked askedSinceILeftYou)
@@ -192,9 +207,10 @@
 (defrule qustion-Endtroducing
 ?id1 <- (process)
 ?id2 <- (state)
-(askedSinceILeftYou answerMoreSampling)
+(answer askedSinceILeftYou answerMoreSampling)
 =>
 (retract ?id1 ?id2)
+(assert (clean-up))
 (assert (state
 (content songEndtroducing)
 (asked askedEndtroducing)
@@ -204,9 +220,10 @@
 (defrule qustion-BlackSands
 ?id1 <- (process)
 ?id2 <- (state)
-(or (askedPsychic answerWhere) (askedMetaphoricalMusic answerMoreLushOrganic))
+(or (answer askedPsychic answerWhere) (answer askedMetaphoricalMusic answerMoreLushOrganic))
 =>
 (retract ?id1 ?id2)
+(assert (clean-up))
 (assert (state
 (content songBlackSands)
 (asked askedBlackSands)
@@ -216,9 +233,10 @@
 (defrule qustion-MetaphoricalMusic
 ?id1 <- (process)
 ?id2 <- (state)
-(or (askedBlackSands answerMoreLushOrganic) (asked808s answerHipHopBeats) (askedEndtroducing answerMoreInstrumentalBeats))
+(or (answer askedBlackSands answerMoreLushOrganic) (answer asked808s answerHipHopBeats) (answer askedEndtroducing answerMoreInstrumentalBeats))
 =>
 (retract ?id1 ?id2)
+(assert (clean-up))
 (assert (state
 (content songMetaphoricalMusic)
 (asked askedMetaphoricalMusic)
@@ -228,9 +246,10 @@
 (defrule qustion-Dive
 ?id1 <- (process)
 ?id2 <- (state)
-(askedBlackSands answerChillItOut)
+(answer askedBlackSands answerChillItOut)
 =>
 (retract ?id1 ?id2)
+(assert (clean-up))
 (assert (state
 (content songDive)
 (asked askedDive)
@@ -240,9 +259,10 @@
 (defrule qustion-MidnightMenu
 ?id1 <- (process)
 ?id2 <- (state)
-(or (askedSilentShout answerTakeOutVocals) (askedMetaphoricalMusic answerStrangerWonkier) (askedUntrue answerHappierLighter))
+(or (answer askedSilentShout answerTakeOutVocals) (answer askedMetaphoricalMusic answerStrangerWonkier) (answer askedUntrue answerHappierLighter))
 =>
 (retract ?id1 ?id2)
+(assert (clean-up))
 (assert (state
 (content songMidnightMenu)
 (asked askedMidnightMenu)
@@ -252,9 +272,10 @@
 (defrule qustion-Untrue
 ?id1 <- (process)
 ?id2 <- (state)
-(or (askedMidnightMenu answerKeepTheBeats) (askedSinceILeftYou answerDarkerSadder))
+(or (answer askedMidnightMenu answerKeepTheBeats) (answer askedSinceILeftYou answerDarkerSadder))
 =>
 (retract ?id1 ?id2)
+(assert (clean-up))
 (assert (state
 (content songUntrue)
 (asked askedUntrue)
@@ -264,9 +285,10 @@
 (defrule qustion-MusicHasTheRightToChildren
 ?id1 <- (process)
 ?id2 <- (state)
-(or (askedDive answerEducationalFilm) (askedMidnightMenu answerMoreSpacedOut))
+(or (answer askedDive answerEducationalFilm) (answer askedMidnightMenu answerMoreSpacedOut))
 =>
 (retract ?id1 ?id2)
+(assert (clean-up))
 (assert (state
 (content songMusicHasTheRightToChildren)
 (asked askedMusicHasTheRightToChildren)
@@ -276,9 +298,10 @@
 (defrule qustion-SelectedAmbientWorks
 ?id1 <- (process)
 ?id2 <- (state)
-(or (askedKidA answerBlank) (askedMusicHasTheRightToChildren answerMoreElectricFeeling) (askedMidnightMenu answerReadyForClassics))
+(or (answer askedKidA answerBlank) (answer askedMusicHasTheRightToChildren answerMoreElectricFeeling) (answer askedMidnightMenu answerReadyForClassics))
 =>
 (retract ?id1 ?id2)
+(assert (clean-up))
 (assert (state
 (content songSelectedAmbientWorks)
 (asked askedSelectedAmbientWorks)
@@ -289,9 +312,10 @@
 (defrule qustion-Mezzanine
 ?id1 <- (process)
 ?id2 <- (state)
-(askedUntrue answerDropSamples)
+(answer askedUntrue answerDropSamples)
 =>
 (retract ?id1 ?id2)
+(assert (clean-up))
 (assert (state
 (content songMezzanine)
 (asked askedMezzanine)
@@ -301,9 +325,10 @@
 (defrule qustion-JamesBlake
 ?id1 <- (process)
 ?id2 <- (state)
-(or (askedMezzanine answerFeelOfBurial) (askedSpaceIsOnlyNoise answerVocalFocus) (askedPsychic answerLoseGuitars))
+(or (answer askedMezzanine answerFeelOfBurial) (answer askedSpaceIsOnlyNoise answerVocalFocus) (answer askedPsychic answerLoseGuitars))
 =>
 (retract ?id1 ?id2)
+(assert (clean-up))
 (assert (state
 (content songJamesBlake)
 (asked askedJamesBlake)
@@ -314,9 +339,10 @@
 (defrule qustion-Timewind
 ?id1 <- (process)
 ?id2 <- (state)
-(or (askedNeu answerThisElectronic) (askedDrukqs answerNoDrums))
+(or (answer askedNeu answerThisElectronic) (answer askedDrukqs answerNoDrums))
 =>
 (retract ?id1 ?id2)
+(assert (clean-up))
 (assert (state
 (content songTimewind)
 (asked askedTimewind)
@@ -326,9 +352,10 @@
 (defrule qustion-Amber
 ?id1 <- (process)
 ?id2 <- (state)
-(or (askedProgramMusic answerGlitchyDrums) (askedKidA answerLikedDrums) (askedTimewind answerMoreDrums))
+(or (answer askedProgramMusic answerGlitchyDrums) (answer askedKidA answerLikedDrums) (answer askedTimewind answerMoreDrums))
 =>
 (retract ?id1 ?id2)
+(assert (clean-up))
 (assert (state
 (content songAmber)
 (asked askedAmber)
@@ -338,9 +365,10 @@
 (defrule qustion-Drukqs
 ?id1 <- (process)
 ?id2 <- (state)
-(or (askedAmber answerTalentlessButtonPushing))
+(or (answer askedAmber answerTalentlessButtonPushing))
 =>
 (retract ?id1 ?id2)
+(assert (clean-up))
 (assert (state
 (content songDrukqs)
 (asked askedDrukqs)
@@ -350,9 +378,10 @@
 (defrule qustion-Cosmogramma
 ?id1 <- (process)
 ?id2 <- (state)
-(or (askedDrukqs answerSoundsDated) (askedMidnightMenu answerEvenStragierWonkier))
+(or (answer askedDrukqs answerSoundsDated) (answer askedMidnightMenu answerEvenStragierWonkier))
 =>
 (retract ?id1 ?id2)
+(assert (clean-up))
 (assert (state
 (content songCosmogramma)
 (asked askedCosmogramma)
@@ -362,9 +391,10 @@
 (defrule qustion-GalaxyGarden
 ?id1 <- (process)
 ?id2 <- (state)
-(askedCosmogramma answerJungle)
+(answer askedCosmogramma answerJungle)
 =>
 (retract ?id1 ?id2)
+(assert (clean-up))
 (assert (state
 (content songGalaxyGarden)
 (asked askedGalaxyGarden)
@@ -374,9 +404,10 @@
 (defrule qustion-Rooms
 ?id1 <- (process)
 ?id2 <- (state)
-(or (askedGalaxyGarden answerStrangeVocals) (askedDrukqs answerGetWilder))
+(or (answer askedGalaxyGarden answerStrangeVocals) (answer askedDrukqs answerGetWilder))
 =>
 (retract ?id1 ?id2)
+(assert (clean-up))
 (assert (state
 (content songRooms)
 (asked askedRooms)
@@ -386,9 +417,10 @@
 (defrule qustion-RosszCsillagAlattSzuletett
 ?id1 <- (process)
 ?id2 <- (state)
-(askedRooms answerDrumsLouderCrazier)
+(answer askedRooms answerDrumsLouderCrazier)
 =>
 (retract ?id1 ?id2)
+(assert (clean-up))
 (assert (state
 (content songRosszCsillagAlattSzuletett)
 (asked askedRosszCsillagAlattSzuletett)
@@ -398,11 +430,12 @@
 (defrule qustion-ProgramMusicLeaf
 ?id1 <- (process)
 ?id2 <- (state)
-(askedRosszCsillagAlattSzuletett answerCalmDown)
+(answer askedRosszCsillagAlattSzuletett answerCalmDown)
 =>
 (retract ?id1 ?id2)
+(assert (clean-up))
 (assert (state
-(content songProgramMusicLeaf)
+(content songProgramMusic)
 (asked askedProgramMusicLeaf)
 (answers)
 (is-leaf Yes)
@@ -411,9 +444,10 @@
 (defrule qustion-TheOrbsAdventuresBeyondTheUltraWorld
 ?id1 <- (process)
 ?id2 <- (state)
-(or (askedDrukqs answerSteadyBeat) (askedTimewind answerSteadyBeat))
+(or (answer askedDrukqs answerSteadyBeat) (answer askedTimewind answerSteadyBeat))
 =>
 (retract ?id1 ?id2)
+(assert (clean-up))
 (assert (state
 (content songTheOrbsAdventuresBeyondTheUltraWorld)
 (asked askedTheOrbsAdventuresBeyondTheUltraWorld)
@@ -423,9 +457,10 @@
 (defrule qustion-Accelerator
 ?id1 <- (process)
 ?id2 <- (state)
-(askedTheOrbsAdventuresBeyondTheUltraWorld answerLessAmbient)
+(answer askedTheOrbsAdventuresBeyondTheUltraWorld answerLessAmbient)
 =>
 (retract ?id1 ?id2)
+(assert (clean-up))
 (assert (state
 (content songAccelerator)
 (asked askedAccelerator)
@@ -435,9 +470,10 @@
 (defrule qustion-Lifeforms
 ?id1 <- (process)
 ?id2 <- (state)
-(or (askedAccelerator answerMore) (askedGalaxyGarden answerRainforestMusic))
+(or (answer askedAccelerator answerMore) (answer askedGalaxyGarden answerRainforestMusic))
 =>
 (retract ?id1 ?id2)
+(assert (clean-up))
 (assert (state
 (content songLifeforms)
 (asked askedLifeforms)
@@ -447,9 +483,10 @@
 (defrule qustion-7614
 ?id1 <- (process)
 ?id2 <- (state)
-(or (askedPhaedra answerMoreAmbientStuff) (askedLifeforms answerSomeAmbientNow) (askedBrownAlbum answerHalcyon))
+(or (answer askedPhaedra answerMoreAmbientStuff) (answer askedLifeforms answerSomeAmbientNow) (answer askedBrownAlbum answerHalcyon))
 =>
 (retract ?id1 ?id2)
+(assert (clean-up))
 (assert (state
 (content song7614)
 (asked asked7614)
@@ -459,9 +496,10 @@
 (defrule qustion-Ambient2ThePlateauxOfMirror
 ?id1 <- (process)
 ?id2 <- (state)
-(asked7614 answerEvenMoreAmbient)
+(answer asked7614 answerEvenMoreAmbient)
 =>
 (retract ?id1 ?id2)
+(assert (clean-up))
 (assert (state
 (content songAmbient2ThePlateauxOfMirror)
 (asked askedAmbient2ThePlateauxOfMirror)
@@ -471,9 +509,10 @@
 (defrule qustion-Ambient1MusicForAirports
 ?id1 <- (process)
 ?id2 <- (state)
-(askedAmbient2ThePlateauxOfMirror answerTooBusy)
+(answer askedAmbient2ThePlateauxOfMirror answerTooBusy)
 =>
 (retract ?id1 ?id2)
+(assert (clean-up))
 (assert (state
 (content songAmbient1MusicForAirports)
 (asked askedAmbient1MusicForAirports)
@@ -484,9 +523,10 @@
 (defrule qustion-BrownAlbum
 ?id1 <- (process)
 ?id2 <- (state)
-(askedDiscovery answerDontStopDancing)
+(answer askedDiscovery answerDontStopDancing)
 =>
 (retract ?id1 ?id2)
+(assert (clean-up))
 (assert (state
 (content songBrownAlbum)
 (asked askedBrownAlbum)
@@ -496,9 +536,10 @@
 (defrule qustion-Alcachofa
 ?id1 <- (process)
 ?id2 <- (state)
-(or (askedBrownAlbum answerLessMelody) (askedSpaceIsOnlyNoise answerTooBusyMelodius))
+(or (answer askedBrownAlbum answerLessMelody) (answer askedSpaceIsOnlyNoise answerTooBusyMelodius))
 =>
 (retract ?id1 ?id2)
+(assert (clean-up))
 (assert (state
 (content songAlcachofa)
 (asked askedAlcachofa)
@@ -509,9 +550,10 @@
 (defrule qustion-Immunity
 ?id1 <- (process)
 ?id2 <- (state)
-(or (askedBrownAlbum answerMixTheTwo) (askedAmbient2ThePlateauxOfMirror answerMixTheTwo))
+(or (answer askedBrownAlbum answerMixTheTwo) (answer askedAmbient2ThePlateauxOfMirror answerMixTheTwo))
 =>
 (retract ?id1 ?id2)
+(assert (clean-up))
 (assert (state
 (content songImmunity)
 (asked askedImmunity)
@@ -521,9 +563,10 @@
 (defrule qustion-Eingya
 ?id1 <- (process)
 ?id2 <- (state)
-(askedImmunity answerPiano)
+(answer askedImmunity answerPiano)
 =>
 (retract ?id1 ?id2)
+(assert (clean-up))
 (assert (state
 (content songEingya)
 (asked askedEingya)
@@ -534,9 +577,10 @@
 (defrule qustion-Discovery
 ?id1 <- (process)
 ?id2 <- (state)
-(or (askedImmunity answerHeavierBits) (askedBrownAlbum answerDontStopDancing))
+(or (answer askedImmunity answerHeavierBits) (answer askedBrownAlbum answerDontStopDancing))
 =>
 (retract ?id1 ?id2)
+(assert (clean-up))
 (assert (state
 (content songDiscovery)
 (asked askedDiscovery)
@@ -546,9 +590,10 @@
 (defrule qustion-Cross
 ?id1 <- (process)
 ?id2 <- (state)
-(askedDiscovery answerDirtier)
+(answer askedDiscovery answerDirtier)
 =>
 (retract ?id1 ?id2)
+(assert (clean-up))
 (assert (state
 (content songCross)
 (asked askedCross)
@@ -559,9 +604,10 @@
 (defrule qustion-AreYouShpongled
 ?id1 <- (process)
 ?id2 <- (state)
-(or (askedAccelerator answerDrugs) (askedDiscovery answerTribal))
+(or (answer askedAccelerator answerDrugs) (answer askedDiscovery answerTribal))
 =>
 (retract ?id1 ?id2)
+(assert (clean-up))
 (assert (state
 (content songAreYouShpongled)
 (asked askedAreYouShpongled)
@@ -571,9 +617,10 @@
 (defrule qustion-Timeless
 ?id1 <- (process)
 ?id2 <- (state)
-(or (askedAccelerator answerFocusOnFast) (askedAreYouShpongled answerFocusOnFast))
+(or (answer askedAccelerator answerFocusOnFast) (answer askedAreYouShpongled answerFocusOnFast))
 =>
 (retract ?id1 ?id2)
+(assert (clean-up))
 (assert (state
 (content songTimeless)
 (asked askedTimeless)
@@ -583,12 +630,21 @@
 (defrule qustion-NorthernExposure
 ?id1 <- (process)
 ?id2 <- (state)
-(or (askedTimeless answerFrozenWastelands) (askedAreYouShpongled answerFrozenWastelands) (askedAreYouShpongled answerCarelessFunDance) (askedDiscovery answerCarelessFunDance))
+(or (answer askedTimeless answerFrozenWastelands) (answer askedAreYouShpongled answerFrozenWastelands) (answer askedAreYouShpongled answerCarelessFunDance) (answer askedDiscovery answerCarelessFunDance))
 =>
 (retract ?id1 ?id2)
+(assert (clean-up))
 (assert (state
 (content songNorthernExposure)
 (asked askedNorthernExposure)
 (answers)
 (is-leaf Yes)
 )))
+
+(defrule retract-all-answers
+?id <- (clean-up)
+?fact <- (answer ? ?)
+=>
+(retract ?fact)
+(retract ?id)
+)
